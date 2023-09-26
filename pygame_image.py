@@ -12,8 +12,12 @@ def main():
     kt3_img = pg.image.load("ex01/fig/3.png")
     kt3_img = pg.transform.flip(kt3_img, True, False)
     #問3
-    kt3_img_rotate = pg.transform.rotozoom(kt3_img, 10, 1.0)
-    img_lst = [kt3_img, kt3_img_rotate]
+    img_lst = []
+    for i in range(10):
+        img_lst.append(pg.transform.rotozoom(kt3_img, i, 1.0))
+    for i in range(10, -1, -1):
+        img_lst.append(pg.transform.rotozoom(kt3_img, i, 1.0))
+    
 
     while True:
         for event in pg.event.get():
@@ -24,10 +28,8 @@ def main():
         if tmr >= 1599:
             tmr = 0
         #問5
-        if tmr % 10 > 5:
-            screen.blit(img_lst[0], [300, 200])
-        else:
-            screen.blit(img_lst[1], [300, 200])
+        n = tmr % 20
+        screen.blit(img_lst[n], [300, 200])
         pg.display.update()
         tmr += 1        
         clock.tick(100)
