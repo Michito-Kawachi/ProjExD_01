@@ -7,6 +7,7 @@ def main():
     screen = pg.display.set_mode((800, 600))
     clock  = pg.time.Clock()
     bg_img = pg.image.load("ex01/fig/pg_bg.jpg")
+    bg_img_flip = pg.transform.flip(bg_img, True, False)
     tmr = 0
     #問2
     kt3_img = pg.image.load("ex01/fig/3.png")
@@ -24,15 +25,20 @@ def main():
             if event.type == pg.QUIT: return
         #問6 
         screen.blit(bg_img, [-tmr, 0])
-        screen.blit(bg_img, [1600-tmr, 0])
-        if tmr >= 1599:
+        screen.blit(bg_img_flip, [1600-tmr, 0])
+        #演習2
+        #screen.blit(bg_img_flip, [1600*2-tmr, 0])
+        screen.blit(bg_img, [1600*2-tmr, 0])
+        if tmr >= 1600*2-1:
             tmr = 0
         #問5
         n = tmr % 20
-        screen.blit(img_lst[n], [300, 200])
+        kt_rct = kt3_img.get_rect()
+        kt_rct.center = 300, 200
+        screen.blit(img_lst[n], kt_rct)
         pg.display.update()
         tmr += 1        
-        clock.tick(100)
+        clock.tick(1000)
 
 
 if __name__ == "__main__":
