@@ -9,16 +9,22 @@ def main():
     bg_img = pg.image.load("ex01/fig/pg_bg.jpg")
     tmr = 0
     #問2
-    kt3_img = pg.image.load("./fig/3.png")
+    kt3_img = pg.image.load("ex01/fig/3.png")
     kt3_img = pg.transform.flip(kt3_img, True, False)
     #問3
     kt3_img_rotate = pg.transform.rotate(kt3_img, 10)
     img_lst = [kt3_img, kt3_img_rotate]
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
         screen.blit(bg_img, [0, 0])
+        #問5
+        if tmr % 10 > 5:
+            screen.blit(img_lst[0], [300, 200])
+        else:
+            screen.blit(img_lst[1], [300, 200])
         pg.display.update()
         tmr += 1        
         clock.tick(10)
